@@ -131,18 +131,21 @@ function someRecursive(arr, cb){
 // flatten([[1],[2],[3]]) // [1,2,3]
 // flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]) // [1,2,3]
 
+function flatten(arr) {
+    const result = [];
+    function helper(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            if (Array.isArray(arr[i])) {
+                helper(arr[i])
+            } else {
+                result.push(arr[i]);
+            }
+        }    
 
-function flatten(oldArr) {
-    const newArr = []
-        for (let i = 0; i < oldArr.length; i++){
-          if (Array.isArray(oldArr[i])) {
-                newArr = newArr.concat(flatten(oldArr[i]))
-          } else {
-                newArr.push(oldArr[i])
-          }
-    } 
-    return newArr;
-  }
+    }
+    helper(arr);
+    return result; 
+}
 
 
 // capitalizeFirst: Write a recursive function called capitalizeFirst. Given an array of strings, capitalize the first letter of each string in the array.
@@ -166,18 +169,51 @@ function capitaliseFirst(arr) {
 // nestedEvenSum : Write a recursive function called nestedEvenSum. Return the sum of all even numbers in an object which may contain nested objects.
 
 
-// function nestedEvenSum(obj) {
-//     const result = [];
+function nestedEvenSum (obj) {
+    // add whatever parameters you deem necessary - good luck!
+    const result = [];
 
-//     function helper(obj) {
-//         while () {
+    function helper(obj) {
+        for (const key in obj) {
+            if (typeof(obj[key]) === "object") {
+                helper(obj[key]);
+            } else if (typeof(obj[key]) === "number" && obj[key] % 2 == 0){
+                result.push(obj[key]);
+            }
+        }
+    }
+    helper(obj);
 
-//         }
-//     }
-
-//     helper(obj);
-//     return result;
-// }
+    let sum = 0;
+    for (number of result) {
+        sum += number;
+    }
+    return sum; 
+  }
+  
+  
+  var obj1 = {
+    outer: 2,
+    obj: {
+      inner: 2,
+      otherObj: {
+        superInner: 2,
+        notANumber: true,
+        alsoNotANumber: "yup"
+      }
+    }
+  }
+  
+  var obj2 = {
+    a: 2,
+    b: {b: 2, bb: {b: 3, bb: {b: 2}}},
+    c: {c: {c: 2}, cc: 'ball', ccc: 5},
+    d: 1,
+    e: {e: {e: 2}, ee: 'car'}
+  };
+  
+//   console.log(nestedEvenSum(obj1)); // 6
+//   console.log(nestedEvenSum(obj2)); // 10
 
 
 // capitalizeWords: Write a recursive function called capitalizeWords. Given an array of words, return a new array containing each word capitalized.
@@ -203,3 +239,83 @@ function capitalisedWords(arr) {
 
 }
 
+// stringifyNumbers: Write a function called stringifyNumbers which takes in an object and finds all of the values which are numbers and converts them to strings. Recursion would be a great way to solve this!
+
+let obj = {
+    num: 1,
+    test: [],
+    data: {
+        val: 4,
+        info: {
+            isRight: true,
+            random: 66
+        }
+    }
+}
+
+function stringifyNumbers(obj) {
+    var newObj = {};
+    for (var key in obj) {
+      if (typeof obj[key] === 'number') {
+        newObj[key] = obj[key].toString();
+      } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+        newObj[key] = stringifyNumbers(obj[key]);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+    return newObj;
+  }
+
+
+/*
+{
+    num: "1",
+    test: [],
+    data: {
+        val: "4",
+        info: {
+            isRight: true,
+            random: "66"
+        }
+    }
+}
+*/
+
+console.log(stringifyNumbers(obj));
+
+// collectStrings: Write a function called collectStrings which accepts an object and returns an array of all the values in the object that have a typeof string
+
+function collectStrings(obj) {
+    const result = [];
+
+    function helper(obj) {
+        for (const key in obj) {
+            if (typeof(obj[key]) === "string") {
+                result.push(obj[key]);
+            } else {
+                helper(obj[key]);
+            }
+        }
+    }
+    helper(obj);
+
+    return result;
+}   
+
+
+const obj100 = {
+    stuff: "foo",
+    data: {
+        val: {
+            thing: {
+                info: "bar",
+                moreInfo: {
+                    evenMoreInfo: {
+                        weMadeIt: "baz"
+                    }
+                }
+            }
+        }
+    }
+}
