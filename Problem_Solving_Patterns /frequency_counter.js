@@ -247,17 +247,63 @@ function isSubsequence(str1, str2) {
 // Write a function called minSubArrayLen which accepts two parameters - an array of positive integers and a positive integer.
 // This function should return the minimal length of a contiguous subarray of which the sum is greater than or equal to the integer passed to the function. If there isn't one, return 0 instead.
 
-function maxSumarraySum(arr, num) {
-    let tempSum = 0;
-    let maxSum = 0;
+function maxSumarraySum(arr, total) {
+    let start = 0;
+    let end = 0;
+    let sum = 0;
+    let minLen = Infinity;
 
-    function windowSlides(num) {
-        let maxSum
+    while (start < arr.length) {
+        if (sum < total && end < num.length) {
+            sum += arr[end];
+            end ++;
+        }
+
+        else if (total <= sum) {
+            minLen = Math.min(minLen, end - start); 
+            sum -= arr[start];
+            start++;
+        }
+
+        else {
+            break;
+        }
+    }
+    if (minLen === Infinity) {
+        return 0;
     }
 
-    for (let i = 1; i < arr.length; i++) {
-        windowSlides(i);
-    }
+    return minLen;
+
 }
 
 
+// Write a function called findLongestSubstring, which accepts a string and returns the length of the longest substring with all distinct characters.
+
+function findLongestSubstring(str) {    
+    let longest = 0;
+    let start = 0;
+    let seen = {};
+
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+
+        if (seen[char]) {
+            start = Math.max(start, seen[char]);
+        }
+
+        seen[char] = i + 1; 
+    }
+
+    return len;
+}
+
+
+
+// findLongestSubstring('') // 0
+// findLongestSubstring('rithmschool') // 7
+// findLongestSubstring('thisisawesome') // 6
+// findLongestSubstring('thecatinthehat') // 7
+// findLongestSubstring('bbbbbb') // 1
+// findLongestSubstring('longestsubstring') // 8
+// findLongestSubstring('thisishowwedoit') // 6
