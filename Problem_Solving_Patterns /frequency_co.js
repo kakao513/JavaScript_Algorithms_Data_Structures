@@ -12,7 +12,7 @@ function countUniqueValues(arr){
 countUniqueValues([1,2,2,5,7,7,99])
 
 
-function minSubArrayLen(nums, sum) {
+function minSubArrayLen (nums, sum) {
     let total = 0;
     let start = 0;
     let end = 0;
@@ -21,13 +21,13 @@ function minSubArrayLen(nums, sum) {
     while (start < nums.length) {
       // if current window doesn't add up to the given sum then 
           // move the window to right
-      if(total < sum && end < nums.length){
+      if (total < sum && end < nums.length) {
         total += nums[end];
               end++;
       }
       // if current window adds up to at least the sum given then
           // we can shrink the window 
-      else if(total >= sum){
+      else if (total >= sum){
         minLen = Math.min(minLen, end-start);
               total -= nums[start];
               start++;
@@ -40,3 +40,5 @@ function minSubArrayLen(nums, sum) {
    
     return minLen === Infinity ? 0 : minLen;
   }
+
+
