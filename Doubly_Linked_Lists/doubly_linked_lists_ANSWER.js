@@ -27,7 +27,7 @@ class DoublyLinkedList {
         return this;
     }
 
-    pop () {
+    pop() {
         if (!this.head) {
             return undefined;
         }
