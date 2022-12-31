@@ -6,7 +6,6 @@ class Node{
     }
 }
 
-
 class DoublyLinkedList {
     constructor(){
         this.head = null;
@@ -26,7 +25,7 @@ class DoublyLinkedList {
         this.length++;
         return this;
     }
-
+    
     pop () {
         if (!this.head) {
             return undefined;
